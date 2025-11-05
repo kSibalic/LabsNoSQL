@@ -21,6 +21,8 @@ GET page_views:article:123
 DECR page_views:article:123
 GET page_views:article:123
 
+=========================================================================================================
+
 ZADATAK 2
 
 a)
@@ -33,6 +35,8 @@ HINCRBY user:101 points 25
 HSET user:101 status "premium"
 HGETALL user:101
 
+=========================================================================================================
+
 ZADATAK 3
 
 a)
@@ -43,6 +47,8 @@ LRANGE user:101:activity_log 0 4
 LPUSH user:101:activity_log “Ponovno se prijavio.”
 LTRIM user:101:activity_log 0 2
 LRANGE user:101:activity_log 0 -1
+
+=========================================================================================================
 
 ZADATAK 4
 
@@ -58,6 +64,8 @@ SCARD article:123:tags
 SADD article:456:tags “redis” “caching” “performance”
 SINTER article:123:tags article:456:tags
 
+=========================================================================================================
+
 ZADATAK 5
 
 a)
@@ -69,4 +77,3 @@ ZADD game:leaderboard 2500 “Marko”
 ZREVRANGE game:leaderboard 0 2 WITHSCORES
 ZSCORE game:leaderboard “Iva”
 ZREVRANK game:leaderboard "Pero"
-
