@@ -1,0 +1,36 @@
+services:
+  redis:
+    image: redis:latest
+    container_name: redis-lab
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes --requirepass studentlab
+    volumes:
+      - redis_data:/data
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    networks:
+      - redis-network
+    restart: unless-stopped
+
+  redis-insight:
+    image: redis/redisinsight:latest
+    container_name: redis-insight-lab
+    ports:
+      - "5540:5540"
+    volumes:
+      - redis_insight_data:/db
+    networks:
+      - redis-network
+    restart: unless-stopped
+    depends_on:
+      - redis
+
+volumes:
+  redis_data:
+    driver: local
+  redis_insight_data:
+    driver: local
+
+networks:
+  redis-network:
+    driver: bridge

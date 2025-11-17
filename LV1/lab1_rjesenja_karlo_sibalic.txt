@@ -1,0 +1,79 @@
+ZADATAK 1
+
+a) 
+SET user:name:1 “Karlo
+GET user:name:1
+EXISTS user:2:name
+GET user:2:name
+
+b)
+SETEX cache:page:home 20 "Ovo je HTML sadrzaj pocetne stranice"
+GET cache:page:home
+TTL cache:page:home
+GET cache:page:home
+EXISTS cache:page:home -> (integer) 0 — ključ ne postoji
+
+c)
+INCR page_views:article:123
+INCR page_views:article:123
+INCR page_views:article:123
+GET page_views:article:123
+DECR page_views:article:123
+GET page_views:article:123
+
+=========================================================================================================
+
+ZADATAK 2
+
+a)
+HSET user:101 username "pperic" email "pero.peric@example.com" points "50" status "aktivan"
+
+b)
+HGET user:101 email
+HGETALL user:101
+HINCRBY user:101 points 25
+HSET user:101 status "premium"
+HGETALL user:101
+
+=========================================================================================================
+
+ZADATAK 3
+
+a)
+LPUSH user:101:activity_log "Odjavio se sa sustava." "Pogledao proizvod ID: 45." "Prijavio se na sustav."
+
+b)
+LRANGE user:101:activity_log 0 4
+LPUSH user:101:activity_log “Ponovno se prijavio.”
+LTRIM user:101:activity_log 0 2
+LRANGE user:101:activity_log 0 -1
+
+=========================================================================================================
+
+ZADATAK 4
+
+a)
+SADD article:123:tags “nosql” “database” “redis”
+SADD article:123:tags “redis”
+SMEMBERS article:123:tags (nema duplikata)
+
+b)
+SISMEMBER article:123:tags “database”
+SISMEMBER article:123:tags “sql”
+SCARD article:123:tags
+SADD article:456:tags “redis” “caching” “performance”
+SINTER article:123:tags article:456:tags
+
+=========================================================================================================
+
+ZADATAK 5
+
+a)
+ZADD game:leaderboard 1500 “Ana” 2200 “Pero” 1850 “Iva”
+
+b)
+ZINCRBY game:leaderboard 300 “Ana”
+ZADD game:leaderboard 2500 “Marko”
+ZREVRANGE game:leaderboard 0 2 WITHSCORES
+ZSCORE game:leaderboard “Iva”
+ZREVRANK game:leaderboard "Pero"
